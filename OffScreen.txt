@@ -1,0 +1,68 @@
+Option Explicit
+Private Type RECT
+    Left As Long
+    Top As Long
+    Right As Long
+    Bottom As Long
+    End Type
+Private Declare Function GetActiveWindow Lib "user32" () As Long
+Private Declare Function GetWindowRect Lib "user32" (ByVal hwnd As Long, lpRECT As RECT) As Long
+Private Declare Function SystemParametersInfo Lib "user32" Alias "SystemParametersInfoA" (ByVal uAction As Long, ByVal uParam As Long, lpvParam As Any, ByVal fuWinIni As Long) As Long
+Private Declare Function GetParent Lib "user32" (ByVal hwnd As Long) As Long
+Private Declare Function MoveWindow Lib "user32" (ByVal hwnd As Long, ByVal x As Long, ByVal y As Long, ByVal nWidth As Long, ByVal nHeight As Long, ByVal bRepaint As Long) As Long
+Private Declare Sub mouse_event Lib "user32" (ByVal dwFlags As Long, ByVal dx As Long, ByVal dy As Long, ByVal cButtons As Long, ByVal dwExtraInfo As Long)
+    Private Const SPI_GETWORKAREA = 48
+    Private Const MOUSEEVENTF_LEFTUP = &H4 ' left mouse button up
+    Dim Scr As RECT, RC As RECT
+    Dim ThisWindow As Long
+    Dim FrmT As Long, FrmL As Long, FrmH As Long, FrmW As Long
+Sub Form_Load()
+
+
+    Form1.Visible = True
+        'Get handle for Active window
+        Dim AnyWindow As Long
+        AnyWindow = GetActiveWindow()
+        ThisWindow = AnyWindow
+
+
+        While AnyWindow <> 0
+            ThisWindow = AnyWindow
+            AnyWindow = GetParent(AnyWindow)
+        Wend
+        'Get Window dimensions
+        GetWindowRect ThisWindow, RC
+        'Form Width (including edges)
+        FrmW = RC.Right - RC.Left
+        'Form Height (including TitleBar, edges,
+        '     etc.)
+        FrmH = RC.Bottom - RC.Top
+        'Where is bottom of the screen? (there m
+        '     ay be a taskbar there)
+        SystemParametersInfo SPI_GETWORKAREA, 0&, Scr, 0&
+        'Enable the timer
+        Timer1.Enabled = True
+        Timer1.Interval = 20 '(any value will do)
+    End Sub
+
+
+Private Sub Timer1_Timer()
+    'Get position of window
+    GetWindowRect ThisWindow, RC
+    'Is window within screen?
+
+
+    If RC.Left < 0 Or RC.Right > Scr.Right Or RC.Bottom > Scr.Bottom Or RC.Top < 0 Then
+        'Lift-up the left mouse button
+        mouse_event MOUSEEVENTF_LEFTUP, 0&, 0&, 0&, 0&
+        'Set new Window position
+        FrmL = RC.Left
+        FrmT = RC.Top
+        If RC.Left < 0 Then FrmL = 0
+        If RC.Right > Scr.Right Then FrmL = Scr.Right - FrmW
+        If RC.Top < 0 Then FrmT = 0
+        If RC.Bottom > Scr.Bottom Then FrmT = Scr.Bottom - FrmH
+        'Move the window
+        MoveWindow ThisWindow, FrmL, FrmT, FrmW, FrmH, 1&
+    End If
+End Sub

@@ -1,0 +1,15 @@
+Function BMPLock (file)
+    A=freefile
+    open file For binary as #a
+    B$ = chr(0)
+    put #a, 17, B$
+    close #A
+End function
+
+Function BMPUNLock (File)
+    A = freefile
+    open file For binary as #A
+    B$ = "X"
+    put #A, 17, B$
+    Close #A
+End function

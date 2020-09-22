@@ -1,0 +1,30 @@
+
+Public Sub RedrawPic(Target As PictureBox, Source As StdPicture)
+
+    Dim PicWidth As Integer
+    Dim PicHeight As Integer
+    Dim NewWidth As Integer
+    Dim NewHeight As Integer
+    Dim CenterX As Integer
+    Dim CenterY As Integer
+    PicWidth = Source.Width / 16.763
+    PicHeight = Source.Height / 16.763
+    Aspect = PicWidth / PicHeight
+    If PicWidth > PicHeight Then
+        NewWidth = Target.Width - 240
+        NewHeight = Target.Width / Aspect
+    Else
+        NewWidth = Target.Height * Aspect
+        NewHeight = Target.Height - 240
+    End If
+    CenterX = Target.Width / 2 - NewWidth / 2
+    CenterY = Target.Height / 2 - NewHeight / 2
+    Target.PaintPicture Source, CenterX, CenterY, NewWidth, NewHeight
+
+End Sub
+
+Private Sub Picture1_Click()
+
+    RedrawPic Picture1, Picture2.Picture
+
+End Sub

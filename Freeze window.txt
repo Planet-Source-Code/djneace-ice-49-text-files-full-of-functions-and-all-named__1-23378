@@ -1,0 +1,8 @@
+Public Declare Function LockWindowUpdate Lib "user32" (ByVal hwndLock As Long) As Long
+
+'To freeze a window:
+LockWindowUpdate hwnd
+'To unlock the window:
+LockWindowUpdate 0
+ 
+ 

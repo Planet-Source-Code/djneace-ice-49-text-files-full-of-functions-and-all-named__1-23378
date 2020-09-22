@@ -1,0 +1,29 @@
+Public Function WriteToLog()
+
+    Open ".\clscope.dat" For Output As #1
+        Write #1, Example, , , ,
+    Close #1
+
+End Function
+
+Public Function ReadFromLog()
+
+    Dim Log1 As Variant
+    Dim Log2 As Variant
+    Dim Log3 As Variant
+    Dim Log4 As Variant
+    Dim Log5 As Variant
+    On Error GoTo notexist
+    Open ".\clscope.dat" For Input As #1
+        Input #1, Log1, Log2, Log3, Log4, Log5
+        
+	Example = Log1
+            
+    Close #1
+    Exit Function
+
+notexist:
+    Close #1
+    WriteToLog
+    
+End Function

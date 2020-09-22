@@ -1,0 +1,15 @@
+
+' This procedure allows any Windows event to be processed.
+' This may be necessary to solve any synchronization
+' problems with Windows events.
+' This procedure can also be used to force a delay in
+' processing.
+
+
+Sub WaitForEventsToFinish(NbrTimes As Integer)
+    Dim i As Integer
+
+    For i = 1 To NbrTimes
+        dummy% = DoEvents()
+    Next i
+End Sub

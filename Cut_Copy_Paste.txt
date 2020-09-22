@@ -1,0 +1,13 @@
+
+	' Cut
+
+Clipboard.SetText <TextBox>.SelText
+	<TextBox>.SelText = ""
+
+	' Copy
+
+Clipboard.SetText <TextBox>.SelText
+
+	' Paste
+
+<TextBox>.SelText = Clipboard.GetText()

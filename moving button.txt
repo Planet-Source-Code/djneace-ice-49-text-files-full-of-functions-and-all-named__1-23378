@@ -1,0 +1,14 @@
+
+Public Function RandomNum(Min, Max) As Long
+
+    RandomNum = Int((Max - Min + 1) * Rnd + Min)
+End Function
+
+
+
+Private Sub Command1_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+
+    ht = RandomNum(***Form Top***, ***Form Height**)
+    wh = RandomNum(***Form Left***, ***From Width***)
+    Command1.Move wh, ht
+End Sub

@@ -1,0 +1,11 @@
+Declare Function mciSendString Lib "winmm.dll" Alias "mciSendStringA" (ByVal lpstrCommand As String, ByVal lpstrReturnString As String, ByVal uReturnLength As Long, ByVal hwndCallback As Long) As Long
+
+Private Sub Form_Load()
+  result = mciSendString("open c:\windows\canyon.mid type sequencer alias canyon", 0&, 0, 0)
+  result = mciSendString("play canyon", 0&, 0, 0)
+End Sub
+
+Private Sub Form_Unload()
+   result = mciSendString("close all", 0&, 0, 0)
+End Sub
+

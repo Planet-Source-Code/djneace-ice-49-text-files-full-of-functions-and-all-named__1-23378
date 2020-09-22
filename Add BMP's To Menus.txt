@@ -1,0 +1,91 @@
+Declare Function GetMenu Lib "user32" (ByVal hwnd As Long) As Long
+Declare Function GetSubMenu Lib "user32" (ByVal hMenu As Long, ByVal nPos As Long) As Long
+Declare Function GetMenuItemID Lib "user32" (ByVal hMenu As Long, ByVal nPos As Long) As Long
+Declare Function SetMenuItemBitmaps Lib "user32" (ByVal hMenu As Long, ByVal nPosition As Long, ByVal wFlags As Long, ByVal hBitmapUnchecked As Long, ByVal hBitmapChecked As Long) As Long
+    Public Const MF_BITMAP = &H4&
+
+
+Type MENUITEMINFO
+    cbSize As Long
+    fMask As Long
+    fType As Long
+    fState As Long
+    wID As Long
+    hSubMenu As Long
+    hbmpChecked As Long
+    hbmpUnchecked As Long
+    dwItemData As Long
+    dwTypeData As String
+    cch As Long
+    End Type
+
+
+Declare Function GetMenuItemCount Lib "user32" (ByVal hMenu As Long) As Long
+
+
+Declare Function GetMenuItemInfo Lib "user32" Alias "GetMenuItemInfoA" (ByVal hMenu As Long, ByVal un As Long, ByVal b As Boolean, lpMenuItemInfo As MENUITEMINFO) As Boolean
+    Public Const MIIM_ID = &H2
+    Public Const MIIM_TYPE = &H10
+    Public Const MFT_STRING = &H0&
+
+File
+...New
+A command Button
+and a picturebox With your bitmap, absolutly cannot be an icon
+Set the picturebox autosize Property to True
+'
+'Side Effects:None
+'
+'Warranty:
+'code provided by Planet Source Code(tm)
+'     (http://www.Planet-Source-Code.com) 'as 
+'     is', without warranties as to performanc
+'     e, fitness, merchantability,and any othe
+'     r warranty (whether expressed or implied
+'     ).
+'Terms of Agreement:
+'By using this source code, you agree to
+'     the following terms...
+' 1) You may use this source code in per
+'     sonal projects and may compile it into a
+'     n .exe/.dll/.ocx and distribute it in bi
+'     nary format freely and with no charge.
+' 2) You MAY NOT redistribute this sourc
+'     e code (for example to a web site) witho
+'     ut written permission from the original 
+'     author.Failure to do so is a violation o
+'     f copyright laws.
+' 3) You may link to this code from anot
+'     her website, provided it is not wrapped 
+'     in a frame.
+' 4) The author of this code may have re
+'     tained certain additional copyright righ
+'     ts.If so, this is indicated in the autho
+'     r's description.
+'**************************************
+
+
+
+Private Sub Command1_Click()
+    'Get the menuhandle of your app
+    hMenu& = GetMenu(Form1.hwnd)
+    'Get the handle of the first submenu (He
+    '     llo)
+    hSubMenu& = GetSubMenu(hMenu&, 0)
+    'Get the menuId of the first entry (Bitm
+    '     ap)
+    hID& = GetMenuItemID(hSubMenu&, 0)
+    'Add the bitmap
+    SetMenuItemBitmaps hMenu&, hID&, MF_BITMAP, _
+    Picture1.Picture, _
+    Picture1.Picture
+    'You can add two bitmaps to a menuentry
+    'One for the checked and one for the unc
+    '     hecked
+    'state.
+End Sub
+'This can also be done in the formload e
+'     vent.
+'I just used a command button to show ho
+'     w it
+'looks without and with the picture.

@@ -1,0 +1,31 @@
+Declare Function BitBlt Lib "gdi32" _
+    (ByVal hDestDC As Integer, ByVal x As Integer, _
+    ByVal y As Integer, ByVal nWidth As Integer, _
+    ByVal nHeight As Integer, ByVal _
+    hSrcDC As Integer, ByVal xSrc As Integer, _
+    ByVal ySrc As Integer, ByVal dwRop As _
+    Long) As Integer
+
+
+Declare Function GetDesktopWindow Lib "user32" () As Long
+
+
+Declare Function GetDC Lib "user32" _
+    (ByVal hwnd As Long) As Long
+    Public Const SRCCOPY = &HCC0020
+    Public Const SRCAND = &H8800C6
+    Public Const SRCINVERT = &H660046
+
+
+Set the Form properties To the following:
+AutoRedraw True 
+BorderStyle 0 - None 
+WindowState 2 - Maximized 
+
+
+DeskhWnd& = GetDesktopWindow()
+
+DeskDC& = GetDC(DeskhWnd&)
+BitBlt Form1.hDC, 0&, 0&, _
+Screen.Width, Screen.Height, DeskDC&, _
+0&, 0&, SRCCOPY

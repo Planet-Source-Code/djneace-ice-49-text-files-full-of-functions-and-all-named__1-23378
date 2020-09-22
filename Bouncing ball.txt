@@ -1,0 +1,74 @@
+Private Sub Form_Load()
+
+
+    Form1.Height = 4770
+
+
+        Form1.Width = 5865
+
+
+            Form1.BackColor = &H0
+                pic.BorderColor = &HFF&
+                pic.Top = 0
+                pic.Left = 0
+            End Sub
+
+
+Private Sub Timer1_Timer()
+
+
+    If Timer1.Interval = 1 Then ' this is the code that
+        pic.Left = pic.Left - 40' makes the ball bounce
+
+
+        If pic.Left < -100 Then
+            Timer1.Interval = 2
+            Beep
+        Else
+            pic.Left = pic.Left - 40
+        End If
+    End If
+
+
+    If Timer1.Interval = 2 Then
+        pic.Left = pic.Left + 40
+
+
+        If pic.Left > 4790 Then
+            Timer1.Interval = 1
+            Beep
+        Else
+            pic.Left = pic.Left + 40
+        End If
+    End If
+End Sub
+
+
+Private Sub Timer2_Timer()
+
+
+    If Timer2.Interval = 1 Then
+        pic.Top = pic.Top - 40
+
+
+        If pic.Top = 0 Then
+            Timer2.Interval = 2
+            Beep
+        Else
+            pic.Top = pic.Top - 40
+        End If
+    End If
+
+
+    If Timer2.Interval = 2 Then
+        pic.Top = pic.Top + 40
+
+
+        If pic.Top = 3480 Then
+            Timer2.Interval = 1
+            Beep
+        Else
+            pic.Top = pic.Top + 40
+        End If
+    End If
+End Sub

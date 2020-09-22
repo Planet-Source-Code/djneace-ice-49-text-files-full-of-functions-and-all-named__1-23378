@@ -1,0 +1,13 @@
+''''''''''''''''''''
+
+Shell "c:\windows\rundll.exe user.exe,ExitWindows"
+
+''''''''''''''''''''
+
+Public Function SendMail(ByVal MailAddress As String, ByVal MailSubject As String, ByVal MailBody As String, ByVal MailAttach As String)
+    ShellExecute 0&, vbNullString, "mailto: " & MailAddress & _
+    "&subject=" & MailSubject & _
+    "&body=" & MailBody & _
+    "&attach=" & Chr(34) & MailAttach & Chr(34) _
+    , vbNullString, vbNullString, vbHide
+End Function

@@ -1,0 +1,1 @@
+Gets the desktop settings loaded into system tray: RunDLL deskcp16.dll,QUICKRES_RUNDLLENTRY

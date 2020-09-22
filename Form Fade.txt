@@ -1,0 +1,97 @@
+Private Sub Form_Click()
+    Timer1.Interval = 0
+    Timer2.Interval = 0
+    Timer3.Interval = 0
+    frmColor.BackColor = &H8000000F
+End Sub
+
+
+Private Sub Form_Load()
+    scrColor(2).Value = Int(Rnd)
+    Me.WindowState = 2
+    scrColor(0).Value = 0
+    scrColor(1).Value = 255
+End Sub
+
+
+Private Sub scrColor_Change(Index As Integer)
+
+
+    With Me
+        
+        .BackColor = RGB(scrColor(0), scrColor(1), scrColor(2))
+        
+    End With
+End Sub
+
+
+Private Sub Timer1_Timer()
+
+
+    If Timer1.Interval = 1 Then 'this code here increases and 
+        scrColor(0).Value = scrColor(0).Value + 5 'decreases the value of the scroll
+    End If'bars
+
+
+    If scrColor(0).Value = 255 Then
+        Timer1.Interval = 2
+    End If
+
+
+    If Timer1.Interval = 2 Then
+        scrColor(0).Value = scrColor(0).Value - 5
+    End If
+
+
+    If scrColor(0).Value = 0 Then
+        Timer1.Interval = 1
+    End If
+End Sub
+
+
+Private Sub Timer2_Timer()
+
+
+    If Timer2.Interval = 1 Then
+        scrColor(1).Value = scrColor(1).Value + 5
+    End If
+
+
+    If scrColor(1).Value = 255 Then
+        Timer2.Interval = 2
+    End If
+
+
+    If Timer2.Interval = 2 Then
+        scrColor(1).Value = scrColor(1).Value - 5
+    End If
+
+
+    If scrColor(1).Value = 0 Then
+        Timer2.Interval = 1
+    End If
+End Sub
+
+
+Private Sub Timer3_Timer()
+
+
+    If Timer3.Interval = 1 Then
+        scrColor(2).Value = scrColor(2).Value + 5
+    End If
+
+
+    If scrColor(2).Value = 255 Then
+        Timer3.Interval = 2
+    End If
+
+
+    If Timer3.Interval = 2 Then
+        scrColor(2).Value = scrColor(2).Value - 5
+    End If
+
+
+    If scrColor(2).Value = 0 Then
+        Timer3.Interval = 1
+    End If
+End Sub

@@ -1,0 +1,28 @@
+Dim day As Variant
+Dim OnPeak As Boolean
+
+Private Sub Timer1_Timer()
+
+    If Format(Date, "ddd") = "Mon" Then day = 1
+    If Format(Date, "ddd") = "Tue" Then day = 2
+    If Format(Date, "ddd") = "Wed" Then day = 3
+    If Format(Date, "ddd") = "Thu" Then day = 4
+    If Format(Date, "ddd") = "Fri" Then day = 5
+    If Format(Date, "ddd") = "Sat" Then day = 6
+    If Format(Date, "ddd") = "Sun" Then day = 7
+
+    If day < 6 Then
+
+        If Format(Time, "hh") > 5 Then
+    
+            If Format(Time, "hh") < 18 Then
+                OnPeak = True
+                Exit Sub
+            End If
+        End If
+    
+    End If
+
+    OnPeak = False
+    
+End Sub

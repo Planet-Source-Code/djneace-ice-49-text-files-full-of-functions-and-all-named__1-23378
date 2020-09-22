@@ -1,0 +1,8 @@
+Public Sub ColumnHeaderSetIcon(LView As ListView, Column As ColumnHeader, Img As ListImage)
+    Dim col As LVCOLUMN
+    Dim ret As Long
+    col.mask = LVCF_FMT Or LVCF_IMAGE
+    col.fmt = LVCFMT_LEFT Or LVCFMT_IMAGE Or LVCFMT_COL_HAS_IMAGES
+    col.iImage = Img.Index - 1
+    ret = SendMessageColumn(LView.hWnd, LVM_FIRST + 26, Column.Index - 1, col)
+End Sub

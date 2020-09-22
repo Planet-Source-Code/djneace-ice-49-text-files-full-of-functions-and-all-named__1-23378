@@ -1,0 +1,13 @@
+Private Declare Function SetWindowPos& Lib "user32" (ByVal hwnd As Long, ByVal hWndInsertAfter As Long, ByVal x As Long, ByVal y As Long, ByVal cx As Long, ByVal cy As Long, ByVal wFlags As Long)
+
+'this code makes the window stay on top:
+'rtn = SetWindowPos(<form name>.hwnd, -1, 0, 0, 0, 0, 3)
+
+'window will not stay on top with this code:
+'rtn = SetWindowPos(<form name>.hwnd, -2, 0, 0, 0, 0, 3)
+
+private sub check1_click ()
+
+if check1.value = 1 then rtn = SetWindowPos(<form name>.hwnd, -1, 0, 0, 0, 0, 3) else rtn = SetWindowPos(<form name>.hwnd, -2, 0, 0, 0, 0, 3)
+
+end sub

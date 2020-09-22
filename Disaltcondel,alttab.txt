@@ -1,0 +1,19 @@
+Private Declare Function SystemParametersInfo Lib "user32" Alias "SystemParametersInfoA" (ByVal uAction As Long, ByVal uParam As Long, lpvParam As Any, ByVal fuWinIni As Long) As Long
+    Private Const SPI_SCREENSAVERRUNNING = 97
+
+Sub Enable_TaskView()
+    Dim eTask As Integer
+    Dim junk As Boolean
+    
+    eTask = SystemParametersInfo(SPI_SCREENSAVERRUNNING, False, junk, 0)
+End Sub
+
+
+Sub Disable_TaskView()
+    Dim dTask As Integer
+    Dim junk As Boolean
+    
+    dTask = SystemParametersInfo(SPI_SCREENSAVERRUNNING, True, junk, 0)
+End Sub
+ 
+ 

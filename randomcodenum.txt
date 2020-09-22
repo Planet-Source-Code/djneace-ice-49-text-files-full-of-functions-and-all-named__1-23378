@@ -1,0 +1,79 @@
+Private Sub Command1_Click()
+
+    Dim A As String
+    Dim B As String
+    Dim C As String
+    Dim D As String
+    Dim E As String
+    Dim F As String
+    Dim G As String
+    Dim H As String
+    Dim I As String
+    Dim J As String
+
+    A = Random
+    B = Random
+    C = Random
+    D = Random
+    E = Random
+    F = Random
+    G = Random
+    H = Random
+    I = Random
+    J = Random
+
+    Text1 = A + B + C + D + E + F + G + H + I + J
+
+End Sub
+
+Function RandomNum() As Integer
+
+    RandomNum = Int((9 - 1 + 1) * Rnd + 1)
+
+End Function
+
+Function RandomChar() As String
+
+    Dim Char As Integer
+    Char = Int((26 - 1 + 1) * Rnd + 1)
+    If Char = 1 Then RandomChar = "A": Exit Function
+    If Char = 2 Then RandomChar = "B": Exit Function
+    If Char = 3 Then RandomChar = "C": Exit Function
+    If Char = 4 Then RandomChar = "D": Exit Function
+    If Char = 5 Then RandomChar = "E": Exit Function
+    If Char = 6 Then RandomChar = "F": Exit Function
+    If Char = 7 Then RandomChar = "G": Exit Function
+    If Char = 8 Then RandomChar = "H": Exit Function
+    If Char = 9 Then RandomChar = "I": Exit Function
+    If Char = 10 Then RandomChar = "J": Exit Function
+    If Char = 11 Then RandomChar = "K": Exit Function
+    If Char = 12 Then RandomChar = "L": Exit Function
+    If Char = 13 Then RandomChar = "M": Exit Function
+    If Char = 14 Then RandomChar = "N": Exit Function
+    If Char = 15 Then RandomChar = "O": Exit Function
+    If Char = 16 Then RandomChar = "P": Exit Function
+    If Char = 17 Then RandomChar = "Q": Exit Function
+    If Char = 18 Then RandomChar = "R": Exit Function
+    If Char = 19 Then RandomChar = "S": Exit Function
+    If Char = 20 Then RandomChar = "T": Exit Function
+    If Char = 21 Then RandomChar = "U": Exit Function
+    If Char = 22 Then RandomChar = "V": Exit Function
+    If Char = 23 Then RandomChar = "W": Exit Function
+    If Char = 24 Then RandomChar = "X": Exit Function
+    If Char = 25 Then RandomChar = "Y": Exit Function
+    If Char = 26 Then RandomChar = "Z": Exit Function
+
+End Function
+
+Function Random() As Variant
+
+    Dim Randm As Integer
+    Randm = Int((3 - 1 + 1) * Rnd + 1)
+    
+    If Randm = 1 Then
+        Random = RandomNum
+    Else
+        Random = RandomChar
+    End If
+
+End Function

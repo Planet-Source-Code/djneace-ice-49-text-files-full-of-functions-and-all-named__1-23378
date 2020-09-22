@@ -1,0 +1,99 @@
+Type POINTAPI
+    x As Long
+    y As Long
+    End Type
+    Public picc As Integer
+    Public Max As Integer
+    Public phi As Integer
+    Public lhdc As Long
+    Public b As Boolean
+Public Declare Function LineTo Lib "gdi32" (ByVal hdc As Long, ByVal x As Long, ByVal y As Long) As Long
+Public Declare Function MoveToEx Lib "gdi32" (ByVal hdc As Long, ByVal x As Long, ByVal y As Long, lpPoint As POINTAPI) As Long
+
+    Dim lp As POINTAPI
+    Dim x(10) As Single
+    Dim y(10) As Single
+    Dim xo(10) As Single
+    Dim yo(10) As Single
+    Dim xx As Single
+    Dim yy As Single
+    Dim cc As Single
+    Dim i%, j%
+    Dim l As Long
+    
+    
+
+Option Explicit
+
+
+Private Sub Form_Load()
+    Timer1.Interval = 100
+    Timer1.Enabled = True
+    Max = 3
+    lhdc = Me.hdc
+End Sub
+
+
+Private Sub Timer1_Timer()
+    phi = phi + 20
+
+
+    If phi >= 180 Then
+        phi = 0
+
+
+        If Not b Then
+            Max = Max + 1
+
+
+            If Max = 11 Then
+                Max = 9
+                b = Not b
+            End If
+        Else
+            Max = Max - 1
+
+
+            If Max = 2 Then
+                Max = 4
+                b = Not b
+            End If
+        End If
+    End If
+    cls
+    xx = (Form1.Width - 10) / 2
+    yy = (Form1.Height - 600) / 2
+    If xx <= yy Then cc = xx Else cc = yy
+    For i% = 1 To Max
+        xo(i%) = Cos((phi + (i% - 1) * (360 / Max)) * 3.1415927 / 180) * cc + xx
+        yo(i%) = Sin((phi + (i% - 1) * (360 / Max)) * 3.1415927 / 180) * cc + yy
+    Next i%
+    For i% = 1 To Max
+        xo(i%) = xo(i%) / 15
+        yo(i%) = yo(i%) / 15
+    Next i%
+    For i% = 1 To Max
+        j% = i% + 1
+        If j% > Max Then j% = 1
+        l = MoveToEx(lhdc, xo(i%), yo(i%), lp)
+        l = LineTo(lhdc, xo(j%), yo(j%))
+    Next i%
+    While Abs(CInt(yo(1)) - CInt(yo(3))) > 60 Or Abs(CInt(xo(1)) - CInt(xo(3))) > 60
+	For i% = 1 To Max
+            j% = i% + 1
+            If j% = Max + 1 Then j% = 1
+            x(j%) = xo(j%) + 0.05 * (xo(i%) - xo(j%))
+            y(j%) = yo(j%) + 0.05 * (yo(i%) - yo(j%))
+        Next i%
+	For i% = 1 To Max
+            xo(i%) = x(i%)
+            yo(i%) = y(i%)
+        Next i%
+	For i% = 1 To Max
+            j% = i% + 1
+            If j% > Max Then j% = 1
+            l = MoveToEx(lhdc, xo(i%), yo(i%), lp)
+            l = LineTo(lhdc, xo(j%), yo(j%))
+        Next i%
+    Wend
+End Sub

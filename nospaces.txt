@@ -1,0 +1,15 @@
+' add a text box and place this in it. Rename text1 to the name
+' of the text box.
+
+    Dim Length As String
+    
+    For L = 1 To text1.MaxLength
+            
+        Length = Length + " "
+        If text1 = "" Or text1 = Length Then
+            MsgBox "You can't have spaces in this textbox!"
+            'Exit Sub
+	End If
+            
+    Next L
+    

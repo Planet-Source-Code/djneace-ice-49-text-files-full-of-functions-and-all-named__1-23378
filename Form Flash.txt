@@ -1,0 +1,6 @@
+Private Declare Function FlashWindow Lib "user32" Alias "FlashWindow" (ByVal hWnd as long, ByVal bInvert as long) as long
+
+Private Sub timer1_timer()
+    Dim nReturnValue as Integer
+    nReturnValue = FlashWindow(form1.hWnd, true)
+End Sub
